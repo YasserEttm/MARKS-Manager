@@ -19,12 +19,16 @@ RUN npm run build
 
 # Base image
 FROM openjdk:11-jdk-slim
+
+# Set the working directory inside the container
 WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN chmod +x mvnw
-RUN ./mvnw dependency:go-offline
 
-COPY src ./src
+# Copy the application source code to the working directory
+COPY . .
 
-CMD ["./mvnw", "spring-boot:run"]
+# Build the Spring Boot application (if required)
+# Replace the build command with your specific build process if needed
+RUN mvnw clean package
+
+# Set the command to run the Spring Boot application
+CMD ["java", "-jar", "target/your-application.jar"]
