@@ -4,11 +4,15 @@ services:
     build:
       context: ./FrontEnd
       dockerfile: Dockerfile
+      args:
+        - IMAGE_NAME=yasserettm/FrontEnd:${BUILD_NUMBER}
     ports:
       - 3000:3000
   backend:
     build:
       context: ./BackEnd
       dockerfile: Dockerfile
+      args:
+        - IMAGE_NAME=yasserettm/BackEnd:${BUILD_NUMBER}
     ports:
       - 8082:8082
